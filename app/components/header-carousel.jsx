@@ -52,9 +52,9 @@ const profileInfo = [
 
 export function HeaderCarousel() {
   return (
-    <div className="relative w-full flex flex-col md:flex-row items-center justify-center h-[400px] gap-8">
+    <div className="relative w-full flex flex-col md:flex-row items-center justify-center min-h-[400px] py-8 gap-8">
       {/* Colonne gauche : Carousel de profil */}
-      <div className="flex-1 flex items-center justify-center h-full">
+      <div className="flex-1 flex items-center justify-center w-full">
         <Carousel 
           className="w-full max-w-xl" 
           style={{ position: "static !important" }}
@@ -71,11 +71,11 @@ export function HeaderCarousel() {
         >
           <CarouselContent>
             {profileInfo.map((item) => (
-              <CarouselItem key={item.id} className="flex flex-col items-center justify-center h-[400px] gap-4">
-                <h2 className="text-4xl md:text-5xl font-bold text-foreground text-center drop-shadow-lg">
+              <CarouselItem key={item.id} className="flex flex-col items-center justify-center min-h-[400px] gap-4 px-4">
+                <h2 className="text-3xl md:text-5xl font-bold text-foreground text-center drop-shadow-lg">
                   {item.title}
                 </h2>
-                <p className="text-lg text-muted-foreground text-center max-w-md">
+                <p className="text-base md:text-lg text-muted-foreground text-center max-w-md">
                   {item.description}
                 </p>
                 
@@ -98,7 +98,7 @@ export function HeaderCarousel() {
                 </div>
 
                 {/* Liens */}
-                <div className="flex gap-3 mt-2">
+                <div className="flex flex-wrap gap-3 mt-2 justify-center">
                   {item.links.map((link, index) => (
                     <Button
                       key={index}
@@ -117,14 +117,14 @@ export function HeaderCarousel() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="absolute w-full flex justify-between">
-            <CarouselPrevious className="left-4" />
-            <CarouselNext className="right-4" />
+          <div className="absolute w-full flex justify-between px-4">
+            <CarouselPrevious className="left-0" />
+            <CarouselNext className="right-0" />
           </div>
         </Carousel>
       </div>
       {/* Colonne droite : Photo fixe */}
-      <div className="flex-1 flex items-center justify-center h-full">
+      <div className="flex-1 flex items-center justify-center w-full md:w-auto">
         <div className="relative overflow-hidden shadow-lg border-4 border-background bg-background">
           <img
             src="/img/pexels-moh-adbelghaffar-771742.jpg"
