@@ -35,7 +35,7 @@ const TechnologyCarousel = () => {
       >
         <CarouselContent>
           {technologies.map((tech, index) => (
-            <CarouselItem key={index} className="basis-1/5">
+            <CarouselItem key={index} className="basis-1/3 md:basis-1/5">
               <div className="flex mt-8 items-center justify-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                 <div className="relative w-16 h-16 mb-2">
                   <Image
