@@ -8,48 +8,131 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import { Github, Linkedin, Mail } from "lucide-react"
 
-const headerImages = [
+const profileInfo = [
   {
     id: 1,
-    img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
-    title: "Développement Web",
+    title: "Développeur Full Stack",
+    description: "Passionné par le développement web et mobile, je crée des applications modernes et performantes.",
+    qualities: ["Créatif", "Autonome", "Rigoureux"],
+    strengths: ["React", "Node.js", "TypeScript"],
+    links: [
+      { icon: Github, url: "https://github.com/ton-username", label: "GitHub" },
+      { icon: Linkedin, url: "https://linkedin.com/in/ton-username", label: "LinkedIn" },
+      { icon: Mail, url: "mailto:ton@email.com", label: "Email" }
+    ]
   },
   {
     id: 2,
-    img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
-    title: "Applications Mobile",
+    title: "Expert en UI/UX",
+    description: "Je conçois des interfaces utilisateur intuitives et esthétiques pour une expérience utilisateur optimale.",
+    qualities: ["Minutieux", "Innovant", "Collaboratif"],
+    strengths: ["Figma", "Adobe XD", "Prototypage"],
+    links: [
+      { icon: Github, url: "https://github.com/ton-username", label: "Portfolio" },
+      { icon: Linkedin, url: "https://linkedin.com/in/ton-username", label: "LinkedIn" },
+      { icon: Mail, url: "mailto:ton@email.com", label: "Email" }
+    ]
   },
   {
     id: 3,
-    img: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb",
-    title: "Design UI/UX",
-  },
+    title: "Architecte Solutions",
+    description: "Je conçois et implémente des architectures robustes et évolutives pour répondre aux besoins complexes.",
+    qualities: ["Analytique", "Stratégique", "Leader"],
+    strengths: ["Architecture Cloud", "Microservices", "DevOps"],
+    links: [
+      { icon: Github, url: "https://github.com/ton-username", label: "GitHub" },
+      { icon: Linkedin, url: "https://linkedin.com/in/ton-username", label: "LinkedIn" },
+      { icon: Mail, url: "mailto:ton@email.com", label: "Email" }
+    ]
+  }
 ]
 
 export function HeaderCarousel() {
   return (
-    <Carousel className="w-full">
-      <CarouselContent>
-        {headerImages.map((item) => (
-          <CarouselItem key={item.id}>
-            <div className="relative w-full h-[400px]">
-              <Image
-                src={item.img}
-                alt={item.title}
-                fill
-                className="object-cover"
-                priority
-              />
-              <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                <h2 className="text-4xl font-bold text-white">{item.title}</h2>
-              </div>
-            </div>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious className="left-4" />
-      <CarouselNext className="right-4" />
-    </Carousel>
+    <div className="relative w-full flex flex-col md:flex-row items-center justify-center h-[400px] gap-8">
+      {/* Colonne gauche : Carousel de profil */}
+      <div className="flex-1 flex items-center justify-center h-full">
+        <Carousel 
+          className="w-full max-w-xl" 
+          style={{ position: "static !important" }}
+          opts={{
+            loop: true,
+            align: "start",
+            dragFree: true,
+            containScroll: "trimSnaps",
+            autoplay: {
+              delay: 5000,
+              disableOnInteraction: false,
+            },
+          }}
+        >
+          <CarouselContent>
+            {profileInfo.map((item) => (
+              <CarouselItem key={item.id} className="flex flex-col items-center justify-center h-[400px] gap-4">
+                <h2 className="text-4xl md:text-5xl font-bold text-foreground text-center drop-shadow-lg">
+                  {item.title}
+                </h2>
+                <p className="text-lg text-muted-foreground text-center max-w-md">
+                  {item.description}
+                </p>
+                
+                {/* Qualités */}
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {item.qualities.map((quality, index) => (
+                    <span key={index} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
+                      {quality}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Points forts */}
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {item.strengths.map((strength, index) => (
+                    <span key={index} className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm">
+                      {strength}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Liens */}
+                <div className="flex gap-3 mt-2">
+                  {item.links.map((link, index) => (
+                    <Button
+                      key={index}
+                      variant="outline"
+                      size="sm"
+                      className="gap-2"
+                      asChild
+                    >
+                      <a href={link.url} target="_blank" rel="noopener noreferrer">
+                        <link.icon className="w-4 h-4" />
+                        {link.label}
+                      </a>
+                    </Button>
+                  ))}
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <div className="absolute w-full flex justify-between">
+            <CarouselPrevious className="left-4" />
+            <CarouselNext className="right-4" />
+          </div>
+        </Carousel>
+      </div>
+      {/* Colonne droite : Photo fixe */}
+      <div className="flex-1 flex items-center justify-center h-full">
+        <div className="relative overflow-hidden shadow-lg border-4 border-background bg-background">
+          <img
+            src="/img/pexels-moh-adbelghaffar-771742.jpg"
+            alt="Ma photo"
+            style={{ width: "275px", height: "auto", objectFit: "cover" }}
+          />
+        </div>
+      </div>
+    </div>
   )
 } 

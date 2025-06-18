@@ -9,6 +9,7 @@ export function Providers({ children }) {
       defaultTheme="system"
       enableSystem
       disableTransitionOnChange
+      storageKey="portfolio-theme"
     >
       {children}
     </ThemeProvider>
